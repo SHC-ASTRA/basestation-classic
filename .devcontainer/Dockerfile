@@ -66,8 +66,8 @@ USER astra
 
 # python stuff first for better caching (it takes eons)
 # install pyenv
-RUN curl https://pyenv.run | bash
 ENV PYENV_ROOT="/home/astra/.pyenv"
+RUN curl https://pyenv.run | bash
 
 # install python
 ENV PY_VERSION=3.10
@@ -77,6 +77,12 @@ RUN $PYENV_ROOT/bin/pyenv install $PY_VERSION -v \
 # install poetry
 RUN $PYENV_ROOT/bin/pyenv exec pip install -U pipx \
     && $PYENV_ROOT/bin/pyenv exec python -m pipx install poetry
+
+# install required packages for colcon builds
+RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
+    'empy>=3.3.4,<3.4.0' \
+    'catkin-pkg>=1.0.0,<1.1.0' \
+    'lark>=1.2.2,<1.3.0'
 
 # install nvm
 # node version manager
