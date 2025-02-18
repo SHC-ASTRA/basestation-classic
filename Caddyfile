@@ -1,7 +1,7 @@
 # Static Production Vite build Files
 :8008 {
 	# Root paths direct to the frontend build
-	root * ./frontend/build
+	root * ./frontend/dist
 	# Act as file server
 	file_server
 }
