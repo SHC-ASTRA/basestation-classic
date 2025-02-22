@@ -33,3 +33,7 @@
 		health_status 2xx
 	}
 }
+
+:8888 {
+	reverse_proxy * :80
+}
