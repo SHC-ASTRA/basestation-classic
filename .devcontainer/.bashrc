@@ -88,4 +88,6 @@ export NVM_DIR="$HOME/.nvm"
 # set up pyenv
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-pyenv activate $VENV 2>/dev/null
+
+export PATH="$PATH:/home/astra/.local/bin"
+eval "$(register-python-argcomplete pipx)"

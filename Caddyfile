@@ -1,7 +1,7 @@
 # Static Production Vite build Files
 :8008 {
 	# Root paths direct to the frontend build
-	root * ./frontend/build
+	root * ./frontend/dist
 	# Act as file server
 	file_server
 }
@@ -32,4 +32,8 @@
 		health_timeout 2s
 		health_status 2xx
 	}
+}
+
+:8888 {
+	reverse_proxy * :80
 }

@@ -8,8 +8,20 @@
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "[typescript]": {
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": true
+    },
     "python.languageServer": "Pylance",
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "python.defaultInterpreterPath": "./backend/.venv/bin/python",
     "cSpell.enabledFileTypes": {
         "*": false,
         "markdown": true
@@ -28,5 +40,6 @@
         "rclpy",
         "uah",
         "venv"
-    ]
+    ],
+    "files.autoSave": "onFocusChange"
 }

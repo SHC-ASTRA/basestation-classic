@@ -26,7 +26,7 @@ RUN apt-get update \
 RUN apt-get update \
     && apt-get install -y curl make build-essential \
     cmake git vim sudo g++ man-db bash-completion \
-    jq unzip
+    jq unzip gnupg2
 
 # add colcon
 # see: <https://colcon.readthedocs.io/en/released/user/installation.html>
@@ -37,7 +37,7 @@ RUN echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -
 
 # add ros-dev-tools for development toolchain
 RUN apt-get update \
-    && apt-get install ros-dev-tools -y
+    && apt-get install -y ros-dev-tools
 
 # install python build requirements for pyenv
 # see: <https://github.com/pyenv/pyenv/wiki#suggested-build-environment>
@@ -58,13 +58,6 @@ RUN apt-get update && apt-get install -y caddy
 # a better bash prompt
 RUN curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 
-# install protoc
-# used for protobufs over websocket
-RUN curl --output protoc.zip -L 'https://github.com/protocolbuffers/protobuf/releases/download/v29.0/protoc-29.0-linux-x86_64.zip' \
-    && unzip -q protoc.zip bin/protoc -d /usr/local \
-    && chmod a+x /usr/local/bin/protoc \
-    && rm protoc.zip
-
 ###########################
 # SWITCH TO NON-ROOT USER #
 ###########################
@@ -73,17 +66,23 @@ USER astra
 
 # python stuff first for better caching (it takes eons)
 # install pyenv
-RUN curl https://pyenv.run | bash
 ENV PYENV_ROOT="/home/astra/.pyenv"
+RUN curl https://pyenv.run | bash
 
 # install python
 ENV PY_VERSION=3.10
 RUN $PYENV_ROOT/bin/pyenv install $PY_VERSION -v \
     && $PYENV_ROOT/bin/pyenv global $PY_VERSION
 
-# set up python venv
-ENV VENV=astra
-RUN $PYENV_ROOT/bin/pyenv virtualenv $PY_VERSION $VENV
+# install poetry
+RUN $PYENV_ROOT/bin/pyenv exec pip install -U pipx \
+    && $PYENV_ROOT/bin/pyenv exec python -m pipx install poetry
+
+# install required packages for colcon builds
+RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
+    'empy>=3.3.4,<3.4.0' \
+    'catkin-pkg>=1.0.0,<1.1.0' \
+    'lark>=1.2.2,<1.3.0'
 
 # install nvm
 # node version manager
