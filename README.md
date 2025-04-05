@@ -10,15 +10,17 @@ The University of Alabama in Huntsville.
 
 1. Make sure you're on the correct version of this repo AND that vscode isn't
    showing changes for the submodules. `main` for the submodules is not
+   necessarily correct!
 
-2. In a new vscode terminal window:
+2. Build the ros interfaces
 
     ```bash
-    cd interfaces
+    cd backend/interfaces
     colcon build
     ```
 
-3. In a new vscode terminal window (leave it running!):
+3. Use a new terminal instance for this to ensure you have the latest build
+   interfaces. Use these commands to run the backend:
 
     ```bash
     cd backend
@@ -26,7 +28,7 @@ The University of Alabama in Huntsville.
     uv run start
     ```
 
-4. In a new vscode terminal window (leave it running!):
+4. Finally, use these commands to run the frontend:
 
     ```bash
     cd frontend
