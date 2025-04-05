@@ -17,7 +17,8 @@ These instructions are for:
 1. Open up VSCode and navigate to the `rover-Basestation-Release` project.
    Ensure that the title of the window includes
    "Dev Container: Basestation Release". If it doesn't, bring up the command
-   palette and run the "Rebuild and Reopen in Container" command.
+   palette with `ctrl` + `shift` + `p` and run the
+   `>Dev Containers: Rebuild and Reopen in Container` command.
 
 2. Do `ctrl` + `shift` + `b` to run the launch task.
 
