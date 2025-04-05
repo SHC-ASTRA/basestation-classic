@@ -6,39 +6,25 @@ Rover Challenge in 2025.
 ASTRA is a project under the AutoSat branch of Space Hardware Club as part of
 The University of Alabama in Huntsville.
 
-## If you're on Basestation with no one to help you
+## If you're on basestation and no one is there to help you
 
-1. Make sure you're on the correct version of this repo AND that vscode isn't
-   showing changes for the submodules. Branch `main` for the submodules is not
-   necessarily correct!
+These instructions are for:
 
-3. In a new vscode terminal window:
+- People learning to use arm.
+- People learning to use core.
+- McGinnis that time Riley slept in too long during SAR filming.
 
-    ```bash
-    cd interfaces
-    colcon build
-    ```
+1. Open up VSCode and navigate to the `rover-Basestation-Release` project.
+   Ensure that the title of the window includes
+   "Dev Container: Basestation Release". If it doesn't, bring up the command
+   palette with `ctrl` + `shift` + `p` and run the
+   `>Dev Containers: Rebuild and Reopen in Container` command.
 
-4. In a new vscode terminal window (leave it running!):
+2. Do `ctrl` + `shift` + `b` to run the launch task.
 
-    ```bash
-    cd backend
-    poetry install
-    poetry run start
-    ```
-
-5. In a new vscode terminal window (leave it running!):
-
-    ```bash
-    cd frontend
-    npm install
-    npm run dev
-    ```
-
-6. At this point, vite will fill your ears and eyes with LIES AND DECEIT. Do not
-   fall for its devilish tricks. Instead of opening some evil port ordained by
-   the devil himself, open the only good and holy port: 80. Navigate to
-   <http://localhost:80> in your browser and behold basestation in all of its glory.
+3. Navigate to <https://localhost> in Firefox and behold Basestation in all
+   of its glory. You may have to dismiss a warning to view the page. Click
+   advanced and then visit the site anyways.
 
 ## Getting Started
 

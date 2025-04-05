@@ -1,39 +1,14 @@
-# Static Production Vite build Files
-:8008 {
-	# Root paths direct to the frontend build
-	root * ./frontend/dist
-	# Act as file server
-	file_server
-}
+# main port. everything ends up here and this is what you connect to
+* {
+	# enable https with a self signed cert
+	tls internal
 
-# main port. everything ends up here and this is what you connect t
-:80 {
-	# Bind to all local interfaces (external and loopback)
+	# bind to all addresses
 	bind 0.0.0.0
 
-	# All requests to the /api/ endpoint are reverse-proxied to :5000
-	# where the backend API is actually hosted
+	# backend
 	reverse_proxy /api/* :5000
 
-	# Root /
-	reverse_proxy {
-		# Route to Vite Dev (localhost:8090) or Static Production Build (localhost:8080)
-		# it is possible to route to either vite (dev, port 8090) or to our static files (prod, port 8008)
-		to localhost:8090 localhost:8008
-
-		# Prefer the Vite Dev (localhost:8090)
-		# the first option (vite dev) takes priority, if it's running
-		lb_policy first
-
-		# run health checks on the proxied services to determine whether vite is running
-		# we don't have a specific endpoint for it, but / will give HTTP 200 if the relevant server is working
-		health_uri /
-		health_interval 5s
-		health_timeout 2s
-		health_status 2xx
-	}
-}
-
-:8888 {
-	reverse_proxy * :80
+	# frontend
+	reverse_proxy /* :8090
 }
