@@ -74,9 +74,9 @@ ENV PY_VERSION=3.10
 RUN $PYENV_ROOT/bin/pyenv install $PY_VERSION -v \
     && $PYENV_ROOT/bin/pyenv global $PY_VERSION
 
-# install poetry
+# install uv
 RUN $PYENV_ROOT/bin/pyenv exec pip install -U pipx \
-    && $PYENV_ROOT/bin/pyenv exec python -m pipx install poetry
+    && $PYENV_ROOT/bin/pyenv exec python -m pipx install uv
 
 # install required packages for colcon builds
 RUN $PYENV_ROOT/bin/pyenv exec pip install -U \

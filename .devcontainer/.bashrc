@@ -73,7 +73,7 @@ source /opt/ros/humble/setup.bash
 
 # set up ros interface
 # make the user build the interfaces package if it has not already been
-interface_script="/workspaces/rover-Basestation-Release/interfaces/install/setup.bash"
+interface_script="/workspaces/rover-Basestation-Release/backend/interfaces/install/setup.bash"
 if [[ -f $interface_script ]]; then
   source $interface_script
 else
