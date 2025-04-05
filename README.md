@@ -22,7 +22,7 @@ These instructions are for:
 
 2. Do `ctrl` + `shift` + `b` to run the launch task.
 
-3. Navigate to <https://localhost> in your browser and behold basestation in all
+3. Navigate to <https://localhost> in Firefox and behold basestation in all
    of its glory. You may have to dismiss a warning to view the page. Click
    advanced and then visit the site anyways.
 
