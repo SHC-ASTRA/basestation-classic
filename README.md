@@ -6,13 +6,19 @@ Rover Challenge in 2025.
 ASTRA is a project under the AutoSat branch of Space Hardware Club as part of
 The University of Alabama in Huntsville.
 
-## If you're on basestation and no one is there to help you (I gotchu, McGinnis)
+## If you're on basestation and no one is there to help you
+
+These instructions are for:
+
+- People learning to use arm.
+- People learning to use core.
+- McGinnis that time Riley slept in too long during SAR filming.
 
 1. Make sure you're on the correct version of this repo AND that vscode isn't
-   showing changes for the submodules. `main` for the submodules is not
-   necessarily correct!
+   showing changes for the submodules. You want to be on `main` for everything
+   unless Riley tells you otherwise.
 
-2. Build the ros interfaces
+2. Build the ros interfaces if you haven't already.
 
     ```bash
     cd backend/interfaces
@@ -24,7 +30,6 @@ The University of Alabama in Huntsville.
 
     ```bash
     cd backend
-    uv install
     uv run start
     ```
 
@@ -32,14 +37,16 @@ The University of Alabama in Huntsville.
 
     ```bash
     cd frontend
-    npm install
+    npm install # you only need this command the first time you run Base Station
     npm run dev
     ```
 
-5. At this point, vite will fill your ears and eyes with LIES AND DECEIT. Do not
+5. At this point, Vite will fill your ears and eyes with LIES AND DECEIT. Do not
    fall for its devilish tricks. Instead of opening some evil port ordained by
-   the devil himself, open the only good and holy port: 80. Navigate to
-   <http://localhost:80> in your browser and behold basestation in all of its glory.
+   the devil himself, open the only good and holy port: 443. Navigate to
+   <https://localhost> in your browser and behold basestation in all of its glory.
+   You may have to dismiss a warning to view the page. Click advanced and then
+   visit the site anyways.
 
 ## Getting Started
 

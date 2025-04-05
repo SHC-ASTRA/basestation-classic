@@ -7,7 +7,9 @@
 }
 
 # main port. everything ends up here and this is what you connect t
-:80 {
+* {
+	tls internal
+
 	# Bind to all local interfaces (external and loopback)
 	bind 0.0.0.0
 
@@ -32,8 +34,4 @@
 		health_timeout 2s
 		health_status 2xx
 	}
-}
-
-:8888 {
-	reverse_proxy * :80
 }
