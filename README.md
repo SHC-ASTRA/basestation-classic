@@ -14,39 +14,16 @@ These instructions are for:
 - People learning to use core.
 - McGinnis that time Riley slept in too long during SAR filming.
 
-1. Make sure you're on the correct version of this repo AND that vscode isn't
-   showing changes for the submodules. You want to be on `main` for everything
-   unless Riley tells you otherwise.
+1. Open up VSCode and navigate to the `rover-Basestation-Release` project.
+   Ensure that the title of the window includes
+   "Dev Container: Basestation Release". If it doesn't, bring up the command
+   palette and run the "Rebuild and Reopen in Container" command.
 
-2. Build the ros interfaces if you haven't already.
+2. Do `ctrl` + `shift` + `b` to run the launch task.
 
-    ```bash
-    cd backend/interfaces
-    colcon build
-    ```
-
-3. Use a new terminal instance for this to ensure you have the latest build
-   interfaces. Use these commands to run the backend:
-
-    ```bash
-    cd backend
-    uv run start
-    ```
-
-4. Finally, use these commands to run the frontend:
-
-    ```bash
-    cd frontend
-    npm install # you only need this command the first time you run Base Station
-    npm run dev
-    ```
-
-5. At this point, Vite will fill your ears and eyes with LIES AND DECEIT. Do not
-   fall for its devilish tricks. Instead of opening some evil port ordained by
-   the devil himself, open the only good and holy port: 443. Navigate to
-   <https://localhost> in your browser and behold basestation in all of its glory.
-   You may have to dismiss a warning to view the page. Click advanced and then
-   visit the site anyways.
+3. Navigate to <https://localhost> in your browser and behold basestation in all
+   of its glory. You may have to dismiss a warning to view the page. Click
+   advanced and then visit the site anyways.
 
 ## Getting Started
 
