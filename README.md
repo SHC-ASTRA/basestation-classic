@@ -22,8 +22,8 @@ The University of Alabama in Huntsville.
 
     ```bash
     cd backend
-    poetry install
-    poetry run start
+    uv install
+    uv run start
     ```
 
 4. In a new vscode terminal window (leave it running!):
