@@ -16,9 +16,26 @@
             },
         },
         {
+            "label": "basestation: install backend",
+            "type": "shell",
+            "command": "poetry",
+            "args": [
+                "install"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/backend"
+            },
+            "group": {
+                "kind": "build"
+            },
+            "dependsOn": [
+                "basestation: build interfaces"
+            ]
+        },
+        {
             "label": "basestation: run backend",
             "type": "shell",
-            "command": "uv",
+            "command": "poetry",
             "args": [
                 "run",
                 "start"
@@ -30,7 +47,7 @@
                 "kind": "build"
             },
             "dependsOn": [
-                "basestation: build interfaces"
+                "basestation: install backend"
             ]
         },
         {
