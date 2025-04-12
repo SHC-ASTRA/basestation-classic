@@ -13,6 +13,7 @@ services:
   # caddy
   caddy:
     image: caddy:latest
+    restart: unless-stopped
     volumes:
       - ../Caddyfile:/etc/caddy/Caddyfile
     ports:
