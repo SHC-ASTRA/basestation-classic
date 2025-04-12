@@ -20,7 +20,8 @@
                 "dbaeumer.vscode-eslint",
                 "svelte.svelte-vscode",
                 "eamodio.gitlens",
-                "ardenivanov.svelte-intellisense"
+                "ardenivanov.svelte-intellisense",
+                "ms-azuretools.vscode-docker"
             ]
         }
     },

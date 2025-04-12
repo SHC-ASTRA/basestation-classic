@@ -1,13 +1,5 @@
 {
     "recommendations": [
-        "ms-vscode-remote.remote-containers",
-        "ms-python.python",
-        "ms-python.black-formatter",
-        "ms-vscode.cpptools",
-        "ms-vscode.vscode-typescript-next",
-        "DavidAnson.vscode-markdownlint",
-        "yzhang.markdown-all-in-one",
-        "streetsidesoftware.code-spell-checker",
-        "ms-iot.vscode-ros"
+        "ms-vscode-remote.remote-containers"
     ]
 }
