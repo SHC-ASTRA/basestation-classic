@@ -4,8 +4,8 @@
 	bind 0.0.0.0
 
 	# backend
-	reverse_proxy /api/* basestation:5000
+	reverse_proxy /api/* :5000
 
 	# frontend
-	reverse_proxy /* basestation:8090
+	reverse_proxy /* :8090
 }
