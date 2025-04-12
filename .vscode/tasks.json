@@ -66,6 +66,9 @@
         },
         {
             "label": "basestation: run frontend",
+            "dependsOn": [
+                "basestation: install frontend"
+            ],
             "type": "shell",
             "command": "npm",
             "args": [

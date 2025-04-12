@@ -1,8 +1,5 @@
 # main port. everything ends up here and this is what you connect to
-* {
-	# enable https with a self signed cert
-	tls internal
-
+:80 {
 	# bind to all addresses
 	bind 0.0.0.0
 
