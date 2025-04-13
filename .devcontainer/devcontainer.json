@@ -1,8 +1,11 @@
 {
     "name": "Basestation Release",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "basestation",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "astra",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -13,18 +16,12 @@
                 "DavidAnson.vscode-markdownlint",
                 "yzhang.markdown-all-in-one",
                 "streetsidesoftware.code-spell-checker",
-                "ms-azuretools.vscode-docker",
                 "ms-iot.vscode-ros",
                 "dbaeumer.vscode-eslint",
-                "svelte.svelte-vscode",
                 "eamodio.gitlens",
-                "ardenivanov.svelte-intellisense"
+                "ms-azuretools.vscode-docker"
             ]
         }
     },
-    "updateRemoteUserUID": true,
-    "runArgs": [
-        "--network=host"
-    ],
-    "postStartCommand": "sudo caddy start"
+    "updateRemoteUserUID": true
 }
