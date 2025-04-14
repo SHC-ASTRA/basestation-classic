@@ -12,6 +12,7 @@ SHELL ["/bin/bash", "-c"]
 
 # add standard packages
 RUN yes | unminimize
+RUN apt-get update && apt-get upgrade -y
 RUN apt-get update \
     && apt-get install -y software-properties-common \
     && add-apt-repository -y universe
@@ -92,16 +93,8 @@ RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
     'lark>=1.2.2,<1.3.0' \
     'numpy>=2.2.4,<2.3.0'
 
-# install nvm
-# node version manager
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-# install specific node version and npm
-ENV NODE_VERSION=20
-RUN source ~/.nvm/nvm.sh \
-    && nvm install $NODE_VERSION --latest-npm \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+# install bun
+RUN curl -fsSL https://bun.sh/install | bash -s "bun-v1.2.9"
 
 # set up bashrc
 # link the repository .bashrc over the default Ubuntu

@@ -53,7 +53,7 @@
         {
             "label": "basestation: install frontend",
             "type": "shell",
-            "command": "npm",
+            "command": "bun",
             "args": [
                 "install"
             ],
@@ -70,7 +70,7 @@
                 "basestation: install frontend"
             ],
             "type": "shell",
-            "command": "npm",
+            "command": "bun",
             "args": [
                 "run",
                 "dev"
