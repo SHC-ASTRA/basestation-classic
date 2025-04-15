@@ -98,4 +98,4 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v1.2.9"
 
 # set up bashrc
 # link the repository .bashrc over the default Ubuntu
-RUN rm ~/.bashrc && ln -s /workspace/.devcontainer/.bashrc ~/.bashrc
+RUN rm ~/.bashrc && ln -s /release/.devcontainer/.bashrc ~/.bashrc
