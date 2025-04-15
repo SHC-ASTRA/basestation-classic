@@ -105,4 +105,4 @@ RUN source ~/.nvm/nvm.sh \
 
 # set up bashrc
 # link the repository .bashrc over the default Ubuntu
-RUN rm ~/.bashrc && ln -s /workspace/.devcontainer/.bashrc ~/.bashrc
+RUN rm ~/.bashrc && ln -s /release/.devcontainer/.bashrc ~/.bashrc

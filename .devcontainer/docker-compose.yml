@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspace
+      - ..:/release
       - /var/run/docker.sock:/var/run/docker.sock
     user: astra
     command: bash -c "while true; do sleep 5000; done"

@@ -4,7 +4,7 @@
         "docker-compose.yml"
     ],
     "service": "basestation",
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "/release",
     "remoteUser": "astra",
     "customizations": {
         "vscode": {
