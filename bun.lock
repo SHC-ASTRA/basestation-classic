@@ -1,0 +1,13 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "dependencies": {
+        "@catppuccin/palette": "^1.7.1",
+      },
+    },
+  },
+  "packages": {
+    "@catppuccin/palette": ["@catppuccin/palette@1.7.1", "", {}, "sha512-aRc1tbzrevOTV7nFTT9SRdF26w/MIwT4Jwt4fDMc9itRZUDXCuEDBLyz4TQMlqO9ZP8mf5Hu4Jr6D03NLFc6Gw=="],
+  }
+}
