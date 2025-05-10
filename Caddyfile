@@ -1,8 +1,5 @@
 # main port. everything ends up here and this is what you connect to
-:8080 {
-	# bind to all addresses
-	bind 0.0.0.0
-
+http://localhost:8080, http://192.168.1.31:8080, http://192.168.1.32:8080 {
 	# backend
 	reverse_proxy /api/* :5000
 
