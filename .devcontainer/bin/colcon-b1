@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+
+old_pwd=$(pwd)
+
+# trap to go back to the previous pwd 
+return_to_old_pwd() {
+    cd "$old_pwd"
+}
+
+trap return_to_old_pwd EXIT
+
+# go to the directory where this script is located
+cd /release/backend/interfaces
+if [[ ! -d install ]]; then
+    colcon build
+else
+    echo "install directory already exists, skipping build"
+fi

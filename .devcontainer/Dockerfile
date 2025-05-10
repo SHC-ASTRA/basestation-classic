@@ -71,6 +71,10 @@ RUN useradd -m -U astra \
 
 USER astra
 
+# set up bashrc
+# link the repository .bashrc over the default Ubuntu
+RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
+
 # python stuff first for better caching (it takes eons)
 # install pyenv
 ENV PYENV_ROOT="/home/astra/.pyenv"
@@ -92,17 +96,10 @@ RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
     'lark>=1.2.2,<1.3.0' \
     'numpy>=2.2.4,<2.3.0'
 
-# install nvm
-# node version manager
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+# install bun
+RUN file=$(mktemp) \
+    && curl -fsSL https://bun.sh/install > $file \
+    && bash $file \
+    && rm $file
 
-# install specific node version and npm
-ENV NODE_VERSION=20
-RUN source ~/.nvm/nvm.sh \
-    && nvm install $NODE_VERSION --latest-npm \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
-
-# set up bashrc
-# link the repository .bashrc over the default Ubuntu
-RUN rm ~/.bashrc && ln -s /release/.devcontainer/.bashrc ~/.bashrc
+RUN ln -s /release/.devcontainer/.bashrc ~/.dev_bashrc

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+old_pwd=$(pwd)
+# trap to go back to the previous pwd
+return_to_old_pwd() {
+    cd "$old_pwd"
+}
+trap return_to_old_pwd EXIT
+
+echo "this will nuke any changes you've made and force you to rebuild everything"
+echo "are you sure you want to continue? (yes/[no])"
+read -r answer
+if [[ $answer != "yes" ]]; then
+    echo "aborting"
+    exit 1
+fi
+
+# now go to the release directory
+cd /release
+# and then clean all the directories
+git clean -fdx
+cd backend
+git clean -fdx
+cd interfaces
+git clean -fdx
+cd ../../frontend
+git clean -fdx
+
+echo "cleaned all directories"

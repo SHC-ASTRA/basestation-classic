@@ -4,10 +4,8 @@
         {
             "label": "basestation: build interfaces",
             "type": "shell",
-            "command": "colcon",
-            "args": [
-                "build"
-            ],
+            "command": "/release/.devcontainer/bin/colcon-b1",
+            "args": [],
             "options": {
                 "cwd": "${workspaceFolder}/backend/interfaces"
             },
@@ -53,7 +51,7 @@
         {
             "label": "basestation: install frontend",
             "type": "shell",
-            "command": "npm",
+            "command": "bun",
             "args": [
                 "install"
             ],
@@ -70,7 +68,7 @@
                 "basestation: install frontend"
             ],
             "type": "shell",
-            "command": "npm",
+            "command": "bun",
             "args": [
                 "run",
                 "dev"
