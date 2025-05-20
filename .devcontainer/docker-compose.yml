@@ -11,10 +11,17 @@ services:
     command: bash -c "while true; do sleep 5000; done"
     network_mode: host
 
-  # caddy
   caddy:
     image: caddy:latest
     restart: unless-stopped
     volumes:
       - ../Caddyfile:/etc/caddy/Caddyfile
     network_mode: host
+
+  tileserver:
+    image: maptiler/tileserver-gl
+    volumes:
+      - ../osm:/data
+    command: --file /data/mdrs_terrain_rgb.mbtiles --config /data/config.json
+    ports:
+      - 8070:8080
