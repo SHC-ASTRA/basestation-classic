@@ -75,6 +75,9 @@ USER astra
 # link the repository .bashrc over the default Ubuntu
 RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
 
+# install rustup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile default -y
+
 # python stuff first for better caching (it takes eons)
 # install pyenv
 ENV PYENV_ROOT="/home/astra/.pyenv"
