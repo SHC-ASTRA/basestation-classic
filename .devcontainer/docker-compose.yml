@@ -19,20 +19,15 @@ services:
     network_mode: host
 
   qgis-server:
-    image: qgis/qgis-server:3.40.6-noble
-    ports:
-      - "8070:80"
+    build:
+      context: ./qgis-server
+      dockerfile: Dockerfile
     volumes:
-      # Mount the directory containing your QGS project file
       - ../osm:/data:ro
     environment:
-      # Path to the QGIS project file INSIDE the container
-      - QGIS_PROJECT_FILE=/data/utah_map.qgs
-      - QGIS_SERVER_LOG_LEVEL=0 # 0=Info, 1=Warning, 2=Critical, 3=None (for debugging, 0 is good)
-      - QGIS_SERVER_PARALLEL_RENDERING=True # Enable parallel rendering
-      # Optional: If your QGS project uses relative paths like '../data/gis_data/layer.tif'
-      # you might need to set a base path if QGIS_PROJECT_FILE is in a deep dir.
-      # However, with the above volume mounts and relative paths from the QGS file,
-      # if utah_map.qgs refers to data as e.g. '../gis_data/utah_dem_merged.tif',
-      # it should resolve to /data/gis_data/utah_dem_merged.tif inside the container.
+      - LANG=en_EN.UTF-8
+      - QGIS_PROJECT_FILE=/data/utah.qgs
+      - QGIS_SERVER_LOG_LEVEL=0  # INFO (log all requests)
+      - DEBUG=1                  # display env before spawning QGIS Server
+    network_mode: host
     restart: unless-stopped
