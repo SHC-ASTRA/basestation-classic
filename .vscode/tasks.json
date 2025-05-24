@@ -2,6 +2,15 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "basestation: check maps",
+            "type": "shell",
+            "command": "/release/osm/check_maps.py",
+            "options": {
+                "cwd": "/release/osm"
+            },
+            "group": "build"
+        },
+        {
             "label": "basestation: build interfaces",
             "type": "shell",
             "command": "/release/.devcontainer/bin/colcon-b1",
@@ -84,7 +93,8 @@
             "label": "basestation: run all",
             "dependsOn": [
                 "basestation: run backend",
-                "basestation: run frontend"
+                "basestation: run frontend",
+                "basestation: check maps"
             ],
             "group": {
                 "kind": "build",

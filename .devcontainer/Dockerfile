@@ -13,17 +13,17 @@ SHELL ["/bin/bash", "-c"]
 # add standard packages
 RUN yes | unminimize
 RUN apt-get update \
-    && apt-get install -y software-properties-common \
-    && add-apt-repository -y universe
-
-# add development tools (this is a dev container)
-RUN apt-get update \
-    && apt-get install -y curl make build-essential \
-    cmake git vim sudo g++ man-db bash-completion \
-    jq unzip gnupg2 ca-certificates
-
-# install docker
-RUN apt-get update \
+    && apt-get install -y \
+        software-properties-common \
+    && add-apt-repository -y universe \
+    # add development tools (this is a dev container)
+    && apt-get update \
+    && apt-get install -y \
+        curl make build-essential \
+        cmake git vim sudo g++ man-db bash-completion \
+        jq unzip gnupg2 ca-certificates aria2 \
+    # install docker
+    && apt-get update \
     && install -m 0755 -d /etc/apt/keyrings \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
     && chmod a+r /etc/apt/keyrings/docker.asc \
@@ -31,28 +31,25 @@ RUN apt-get update \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
       $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" > /etc/apt/sources.list.d/docker.list \
     && apt-get update \
-    && apt-get install -y docker-ce-cli \
-    && groupadd docker
-
-# add colcon
-# see: <https://colcon.readthedocs.io/en/released/user/installation.html>
-RUN echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list \
+    && apt-get install -y \
+        docker-ce-cli \
+    # add colcon
+    # see: <https://colcon.readthedocs.io/en/released/user/installation.html>
+    && echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list \
     && curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - \
     && apt-get update \
-    && apt-get install -y python3-colcon-common-extensions
-
-# add ros-dev-tools for development toolchain
-RUN apt-get update \
-    && apt-get install -y ros-dev-tools ros-humble-demo-nodes-cpp
-
-# install python build requirements for pyenv
-# see: <https://github.com/pyenv/pyenv/wiki#suggested-build-environment>
-RUN apt-get update \
     && apt-get install -y \
-    libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
-    libsqlite3-dev libncursesw5-dev xz-utils tk-dev libxml2-dev \
-    libxmlsec1-dev libffi-dev liblzma-dev \
-    debian-keyring debian-archive-keyring apt-transport-https
+        python3-colcon-common-extensions \
+    # add ros-dev-tools for development toolchain
+        ros-dev-tools ros-humble-demo-nodes-cpp \
+    # install python build requirements for pyenv
+    # see: <https://github.com/pyenv/pyenv/wiki#suggested-build-environment>
+        libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
+        libsqlite3-dev libncursesw5-dev xz-utils tk-dev libxml2-dev \
+        libxmlsec1-dev libffi-dev liblzma-dev \
+        debian-keyring debian-archive-keyring apt-transport-https \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # install starship (better bash prompt)
 RUN curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
@@ -60,7 +57,6 @@ RUN curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 # set up astra user
 RUN useradd -m -U astra \
     && usermod -a -G sudo astra \
-    && usermod -a -G docker astra \
     && chsh -s /usr/bin/bash astra \
     && passwd -d astra
 
