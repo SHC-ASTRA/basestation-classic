@@ -13,11 +13,11 @@ SHELL ["/bin/bash", "-c"]
 # add standard packages
 RUN yes | unminimize
 
-# it may seem odd that this is one giant RUN command, but this is done to ensure that
-#   two main things. first, that we minimize `apt-get update` commands to respect
+# it may seem odd that this is one giant RUN command, but this is done to ensure
+#   two main things. first, we minimize `apt-get update` commands to respect
 #   ubuntu's free to use package repositories. second it ensures sure we don't ever
-#   save the apt cache to a docker layer which would make the image larger than it needs
-#   to be and may cause issues with having an ancient package cache
+#   save the apt cache to a docker layer which would make the image larger than it
+#   needs to be and may cause issues with having an ancient package cache
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y install \
