@@ -22,9 +22,15 @@ These instructions are for:
 
 2. Do `ctrl` + `shift` + `b` to run the launch task.
 
-3. Navigate to <https://localhost> in Firefox and behold Basestation in all
-   of its glory. You may have to dismiss a warning to view the page. Click
-   advanced and then visit the site anyways.
+3. Navigate to <https://localhost:8080> in Firefox if it doesn't navigate there
+   automatically.
+
+If something doesn't work for whatever reason, you can try a few things:
+
+- `>Developer: Reload Window` command in the command palette and then giving the
+  steps another shot.
+- Run `clean-all` in a new terminal window (you can get to that with `ctrl` +
+  `shift` + `~`) and then try the steps again.
 
 ## Getting Started
 

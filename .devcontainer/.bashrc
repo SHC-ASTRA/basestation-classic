@@ -65,7 +65,7 @@ touch ~/.hushlogin
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
 
 # set up starship
-export STARSHIP_CONFIG="/workspace/.devcontainer/starship.toml"
+export STARSHIP_CONFIG="/release/.devcontainer/starship.toml"
 eval "$(starship init bash)"
 
 # set up ros paths and commands
@@ -73,17 +73,12 @@ source /opt/ros/humble/setup.bash
 
 # set up ros interface
 # make the user build the interfaces package if it has not already been
-interface_script="/workspace/backend/interfaces/install/setup.bash"
+interface_script="/release/backend/interfaces/install/setup.bash"
 if [[ -f $interface_script ]]; then
   source $interface_script
 else
   echo '[DEV CONTAINER] Please build the interfaces!'
 fi
-
-# set up nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # set up pyenv
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -91,3 +86,6 @@ eval "$(pyenv init -)"
 
 export PATH="$PATH:/home/astra/.local/bin"
 eval "$(register-python-argcomplete pipx)"
+
+# add our cool and special tools to the path
+export PATH=$PATH:/release/.devcontainer/bin
