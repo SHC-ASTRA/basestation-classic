@@ -49,6 +49,33 @@
             ]
         },
         {
+            "label": "basestation: install wasm-pack",
+            "type": "shell",
+            "command" : "cargo install wasm-pack",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "basestation: build rust lib",
+            "dependsOn" : [
+                "basestation: install wasm-pack"
+            ],
+            "type": "shell",
+            "command" : "wasm-pack build",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/frontend/src/components/arm-vis"
+            },
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
             "label": "basestation: install frontend",
             "type": "shell",
             "command": "bun",
@@ -65,7 +92,8 @@
         {
             "label": "basestation: run frontend",
             "dependsOn": [
-                "basestation: install frontend"
+                "basestation: install frontend",
+                "basestation: build rust lib"
             ],
             "type": "shell",
             "command": "bun",
