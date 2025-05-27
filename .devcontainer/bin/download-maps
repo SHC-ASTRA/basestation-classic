@@ -5,7 +5,7 @@ set -e
 # download the USGS 1 arc-second elevation data for the specified tile.
 
 lats="38 39"
-lons="110 111"
+lons="110 111 112"
 
 dir=/release/osm/
 
