@@ -4,7 +4,12 @@
         {
             "label": "basestation: check maps",
             "type": "shell",
-            "command": "/release/osm/check_maps.py",
+            "command": "ros2",
+            "args": [
+                "topic",
+                "echo",
+                "/core/feedback"
+            ],
             "options": {
                 "cwd": "/release/osm"
             },
