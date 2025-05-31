@@ -2,20 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "basestation: check maps",
-            "type": "shell",
-            "command": "ros2",
-            "args": [
-                "topic",
-                "echo",
-                "/core/feedback"
-            ],
-            "options": {
-                "cwd": "/release/osm"
-            },
-            "group": "build"
-        },
-        {
             "label": "basestation: build interfaces",
             "type": "shell",
             "command": "/release/.devcontainer/bin/colcon-b1",
@@ -126,7 +112,6 @@
             "dependsOn": [
                 "basestation: run backend",
                 "basestation: run frontend",
-                "basestation: check maps"
             ],
             "group": {
                 "kind": "build",
