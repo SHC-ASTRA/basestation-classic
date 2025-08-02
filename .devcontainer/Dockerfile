@@ -88,6 +88,9 @@ USER astra
 RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
 RUN ln -s /release/.devcontainer/.bashrc ~/.dev_bashrc
 
+# install rustup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile default -y
+
 # python stuff first for better caching (it takes eons)
 # install pyenv so we can use python 3.10 required by ros2 humble
 ENV PYENV_ROOT="/home/astra/.pyenv"

@@ -2,15 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "basestation: check maps",
-            "type": "shell",
-            "command": "/release/osm/check_maps.py",
-            "options": {
-                "cwd": "/release/osm"
-            },
-            "group": "build"
-        },
-        {
             "label": "basestation: build interfaces",
             "type": "shell",
             "command": "/release/.devcontainer/bin/colcon-b1",
@@ -58,6 +49,20 @@
             ]
         },
         {
+            "label": "basestation: build rust lib",
+            "dependsOn" : [
+            ],
+            "type": "shell",
+            "command" : "bunx",
+            "args": ["wasm-pack", "build"],
+            "options": {
+                "cwd": "${workspaceFolder}/frontend/src/components/arm-vis"
+            },
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
             "label": "basestation: install frontend",
             "type": "shell",
             "command": "bun",
@@ -74,7 +79,8 @@
         {
             "label": "basestation: run frontend",
             "dependsOn": [
-                "basestation: install frontend"
+                "basestation: install frontend",
+                "basestation: build rust lib"
             ],
             "type": "shell",
             "command": "bun",
@@ -94,7 +100,6 @@
             "dependsOn": [
                 "basestation: run backend",
                 "basestation: run frontend",
-                "basestation: check maps"
             ],
             "group": {
                 "kind": "build",
