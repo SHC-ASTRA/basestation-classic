@@ -31,6 +31,15 @@ services:
       - ./srv:/srv:ro
     network_mode: host
 
+  download-maps:
+    build:
+      context: ./.devcontainer
+      dockerfile: Dockerfile
+    volumes:
+      - .:/release
+    user: astra
+    working_dir: /release
+    command: bash -c "source /release/.devcontainer/.bashrc && download-maps"
   qgis-server:
     build:
       context: ./.devcontainer/qgis-server
@@ -44,3 +53,4 @@ services:
       - QGIS_SERVER_LOG_LEVEL=0  # INFO (log all requests)
       - DEBUG=1                  # display env before spawning QGIS Server
     network_mode: host
+

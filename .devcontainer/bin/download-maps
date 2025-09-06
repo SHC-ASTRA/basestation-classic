@@ -54,11 +54,11 @@ done
 if [[ -n $urls ]]; then
     if ! ping -w 3 -c 1 prd-tnm.s3.amazonaws.com ; then
         echo "No internet access. Please check your network connection."
-        return 1
+        exit 1
     fi
 else
     echo "All files are present. No download needed."
-    return 0
+    exit 0
 fi
 
 failed=0
@@ -72,5 +72,5 @@ done
 # if any download failed, return error
 if [[ $failed -ne 0 ]]; then
     echo "One or more downloads failed."
-    return 1
+    exit 1
 fi
