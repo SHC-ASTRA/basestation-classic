@@ -5,12 +5,14 @@ set -e
 # download the USGS 1 arc-second elevation data for the specified tile.
 
 lats="38 39"
-lons="110 111"
+lons="110 111 112"
 
 hville_lats="34"
 hville_lons="086"
 
-dir=/release/osm/
+if [[ -z $dir ]]; then
+    dir=/release/osm/
+fi
 mkdir -p $dir
 
 function get_url {
@@ -52,11 +54,11 @@ done
 if [[ -n $urls ]]; then
     if ! ping -w 3 -c 1 prd-tnm.s3.amazonaws.com ; then
         echo "No internet access. Please check your network connection."
-        exit 1
+        return 1
     fi
 else
     echo "All files are present. No download needed."
-    exit 0
+    return 0
 fi
 
 failed=0
@@ -70,5 +72,5 @@ done
 # if any download failed, return error
 if [[ $failed -ne 0 ]]; then
     echo "One or more downloads failed."
-    exit 1
+    return 1
 fi
