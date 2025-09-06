@@ -1,6 +1,9 @@
+FROM oven/bun:debian AS bun
 # using image with ros humble already installed
 # https://hub.docker.com/_/ros/
 FROM ros:humble-ros-core-jammy
+COPY --from=bun /usr/local/bin/bun /usr/local/bin/bun
+COPY --from=bun /usr/local/bin/bunx /usr/local/bin/bunx
 
 # change shell to bash
 SHELL ["/bin/bash", "-c"]
@@ -114,11 +117,3 @@ RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
     'lark>=1.2.2,<1.3.0' \
     'numpy>=2.2.4,<2.3.0'
 
-# install bun.
-#   we use bun as our frontend package manager. it fills the role of npm while being far faster.
-#   it is pretty much a drop-in replacement, so use bun instead of npm and bunx instead of npx
-#   wherever you would use either
-RUN file=$(mktemp) \
-    && curl -fsSL https://bun.sh/install > $file \
-    && bash $file \
-    && rm $file

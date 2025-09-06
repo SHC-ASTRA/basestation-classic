@@ -1,0 +1,46 @@
+services:
+  # main services. load local dockerfile
+  backend:
+    build:
+      context: ./.devcontainer
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - .:/release
+    user: astra
+    working_dir: /release/backend
+    command: bash -c "source /release/.devcontainer/.bashrc && colcon-b1 && poetry install && poetry run start"
+    network_mode: host
+  frontend:
+    build:
+      context: ./.devcontainer
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - .:/release
+    user: astra
+    working_dir: /release/frontend
+    command: bash -c "source /release/.devcontainer/.bashrc && bun i && bun run dev"
+    network_mode: host
+  
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./srv:/srv:ro
+    network_mode: host
+
+  qgis-server:
+    build:
+      context: ./.devcontainer/qgis-server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./osm:/data:ro
+    environment:
+      - LANG=en_EN.UTF-8
+      - QGIS_PROJECT_FILE=/data/utah.qgs
+      - QGIS_SERVER_LOG_LEVEL=0  # INFO (log all requests)
+      - DEBUG=1                  # display env before spawning QGIS Server
+    network_mode: host

@@ -86,7 +86,7 @@
                 "cwd": "${workspaceFolder}/frontend"
             },
             "group": {
-                "kind": "test"
+                "kind": "build"
             }
         },
         {
