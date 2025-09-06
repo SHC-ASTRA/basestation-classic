@@ -1,0 +1,48 @@
+[package]
+name = "rust-wasm-vis"
+version = "0.1.0"
+authors = ["Tonez3D <111995183+Tonez3D@users.noreply.github.com>"]
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+# TODO Lock the version numbers
+
+[dependencies]
+# OpenGL Wrapper
+glow = "*"
+
+# Better Errors On Panic
+console_error_panic_hook = "0.1"
+
+# Provides Access to Browser types in Rust 
+web-sys = { version = "0.3.77", features = ["HtmlCanvasElement", "WebGl2RenderingContext", "Window","Document", "WebGlUniformLocation", "HtmlCollection"] }
+
+# Web Assembly Generator
+wasm-bindgen = { version = "*"}
+
+# Linear Algebra Crates
+nalgebra = { version = "*"}
+nalgebra-glm = {version = "*"}
+
+# Makes casting for glow so much easier 
+bytemuck = {version = "*"}
+
+# STL File Loader
+stl_io = {version = "*"}
+
+# URDF File Loader
+urdf-rs = {version = "*"}
+
+[profile.dev]
+# Optimization Level
+opt-level = 3
+debug = true
+debug-assertions = true
+# Link Time Optimizations
+lto = 'fat'
+
+[profile.release]
+
+[profile.bench]

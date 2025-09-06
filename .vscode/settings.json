@@ -41,5 +41,6 @@
         "uah",
         "venv"
     ],
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
+    "ros.distro": "humble"
 }

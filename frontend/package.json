@@ -1,0 +1,41 @@
+{
+  "name": "rover-basestation-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@catppuccin/palette": "^1.7.1",
+    "@tailwindcss/vite": "^4.1.7",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^5.5.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-error-boundary": "^5.0.0",
+    "react-leaflet": "^5.0.0",
+    "react-router": "latest",
+    "react-use-websocket": "^4.13.0",
+    "recharts": "^2.15.3",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@types/leaflet": "^1.9.18",
+    "@types/react": "latest",
+    "vite-plugin-wasm": "^3.4.1",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react-swc": "latest",
+    "eslint": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "globals": "latest",
+    "typescript": "~5.6.3",
+    "typescript-eslint": "^8.32.1",
+    "vite": "^6.3.5"
+  }
+}

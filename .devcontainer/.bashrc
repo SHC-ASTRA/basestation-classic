@@ -89,5 +89,3 @@ eval "$(register-python-argcomplete pipx)"
 
 # add our cool and special tools to the path
 export PATH=$PATH:/release/.devcontainer/bin
-
-export PATH="$PATH:/home/astra/.cargo/bin"

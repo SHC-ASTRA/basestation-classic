@@ -47,7 +47,7 @@ RUN apt-get update \
         # install basic dev tools
         make build-essential \
         cmake git vim sudo g++ man-db bash-completion \
-        jq unzip gnupg2 ca-certificates aria2 \
+        jq unzip gnupg2 ca-certificates aria2 iputils-ping \
         # install docker
         docker-ce-cli \
         # add colcon
@@ -87,9 +87,6 @@ USER astra
 #   can link from /release without worrying about it being overwritten
 RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
 RUN ln -s /release/.devcontainer/.bashrc ~/.dev_bashrc
-
-# install rustup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile default -y
 
 # python stuff first for better caching (it takes eons)
 # install pyenv so we can use python 3.10 required by ros2 humble

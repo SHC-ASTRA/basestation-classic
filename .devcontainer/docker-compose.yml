@@ -6,7 +6,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/release
-      - /var/run/docker.sock:/var/run/docker.sock
     user: astra
     command: bash -c "while true; do sleep 5000; done"
     network_mode: host
@@ -15,7 +14,8 @@ services:
     image: caddy:latest
     restart: unless-stopped
     volumes:
-      - ../Caddyfile:/etc/caddy/Caddyfile
+      - ../Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../srv:/srv:ro
     network_mode: host
 
   qgis-server:
