@@ -1,0 +1,266 @@
+@import "./colors.css";
+
+:root {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+	--extra-text-color: var(--subtext-0);
+	--text-color: var(--text);
+	--primary: var(--text);
+
+	--border-radius: 10%;
+	--buttonHeight: 40px;
+
+	/* Container Variables */
+	--container-margin: 2px;
+
+	color: var(--text-color);
+	background-color: var(--base);
+}
+
+pre {
+	overflow: scroll;
+}
+
+table {
+	width: 100%;
+}
+
+td {
+	font-weight: bold;
+	text-align: center;
+	justify-content: center;
+}
+
+.control-button {
+	font-size: 2em;
+}
+.control-button:disabled {
+	cursor: default;
+}
+
+button:disabled {
+	color: var(--overlay-0);
+	cursor: not-allowed;
+}
+button {
+	color: var(--text-color);
+	background-color: var(--crust);
+	cursor: pointer;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+	monospace;
+}
+
+.submit-button {
+	font-size: 1.5rem;
+}
+
+.container {
+	flex-grow: 1;
+	border: 3px;
+	border-style: solid;
+	border-color: var(--text);
+}
+
+.basestation {
+	display: flex;
+	flex-direction: row;
+}
+
+.display {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	text-overflow: clip;
+}
+
+.feedback, .control {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	text-overflow: clip;
+	background-color: var(--mantle);
+	width: 50%;
+	height: 100vh;
+}
+.feedback {
+	margin: var(--container-margin) calc(var(--container-margin) / 2) var(--container-margin) var(--container-margin);
+}
+.control {
+	margin: var(--container-margin) var(--container-margin) var(--container-margin) calc(var(--container-margin) / 2);
+}
+
+.banner {
+	background-color: var(--crust);
+	height: 100vh;
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+}
+
+.banner * {
+	width: calc(100% - 8px);
+	margin: 2px 4px;
+}
+
+.banner-button {
+	padding: 4px;
+	background-color: transparent;
+	border: none;
+}
+
+.banner-button:hover {
+	padding: 4px;
+	border: none;
+	cursor: pointer;
+}
+
+.banner-button-active {
+	background: var(--sapphire);
+}
+
+.banner-button-image {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	aspect-ratio: 1;
+	background-color: var(--text);
+}
+
+.logo {
+	border: 0;
+	padding: 0;
+	background-color: white;
+	border-radius: 5%;
+}
+
+.clucky {
+	width: initial;
+	margin: initial;
+	padding: 4px;
+	border: none;
+}
+
+.clucky-image {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+#map {
+	flex-grow: 1;
+}
+
+.stick-slider {
+	aspect-ratio: 0.5;
+}
+
+input {
+	width: 100%;
+	accent-color: var(--sapphire);
+}
+
+.gradient-indicator {
+	width: 100%;
+	height: 100%;
+}
+
+.indicator-subsection {
+	margin: 2px;
+}
+.indicator-subsection-label {
+	font-size: 1.5em;
+	margin: 0;
+	padding: 0;
+	border-bottom: var(--text-color) 1px solid;
+}
+
+.colored-indicator {
+	display: flex;
+	margin: 1px;
+	border-top: var(--text-color) 1px solid;
+}
+.colored-indicator-label, .colored-indicator-value {
+	margin: 0;
+	padding: 0;
+	flex-grow: 1;
+	width: 50%;
+	text-align: center;
+}
+.colored-indicator-label {
+	border-right: var(--text-color) 1px solid;
+	text-align: center;
+}
+
+.horizontal-split {
+	display: flex;
+	flex-direction: row;
+}
+.horizontal-split > * {
+	flex-grow: 1;
+	width: 50%;
+}
+
+.vertical-split {
+	display: flex;
+	flex-direction: column;
+}
+.vertical-split > * {
+	flex-grow: 1;
+	/* height: 50%; */
+}
+
+.hidden {
+	display: none;
+	visibility: collapse;
+}
+
+.angle-indicator {
+	border-radius: 50%;
+	background-color: var(--crust);
+	aspect-ratio: 1;
+	transition: transform 250ms ease;
+}
+.angle-indicator-pointer {
+	width: 50%;
+	height: 2px;
+	background-color: var(--text);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+h1 {
+	text-align: center;
+	font-size: 2em;
+}
+
+h2 {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.home-controller {
+	display: flex;
+	flex-direction:column;
+	max-width: 50%;
+	left: 25%;
+	position: relative;
+}
+
+.home-button {
+	background-color:transparent;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size:xx-large;
+	color: var(--sapphire);
+}

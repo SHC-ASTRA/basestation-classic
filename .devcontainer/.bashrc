@@ -1,9 +1,3 @@
-# If not running interactively, don't do anything else
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -89,5 +83,3 @@ eval "$(register-python-argcomplete pipx)"
 
 # add our cool and special tools to the path
 export PATH=$PATH:/release/.devcontainer/bin
-
-export PATH="$PATH:/home/astra/.cargo/bin"

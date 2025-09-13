@@ -7,21 +7,70 @@ set -e
 lats="38 39"
 lons="110 111 112"
 
-dir=/release/osm/
+hville_lats="34"
+hville_lons="086"
+
+if [[ -z $dir ]]; then
+    dir=/release/osm/
+fi
+mkdir -p $dir
 
 function get_url {
     echo https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/current/n${1}w${2}/USGS_1_n${1}w${2}.tif
 }
 
-# download the data
+function check_file {
+    # see if the file exists. if it does, return 0, else return 1
+
+    local lat=$1
+    local lon=$2
+    local url=$(get_url $lat $lon)
+
+    if [[ -f "${dir}USGS_1_n${lat}w${lon}.tif" ]]; then
+        return 0
+    fi
+
+    return 1
+}
+
+# keep track if any files are missing
+urls=()
+
+# check if the files exist
 for lat in $lats; do
     for lon in $lons; do
-        # don't re-download if it exists
-        if [[ -f "${dir}USGS_1_n${lat}w${lon}.tif" ]]; then
-            echo "skipping $lat $lon (file already exists)"
-            continue
-        fi
-
-        aria2c -x8 -d $dir "$(get_url $lat $lon)"
+        check_file $lat $lon || urls+=("$(get_url $lat $lon)")
     done
 done
+
+# check if the files exist for huntsville area
+for lat in $hville_lats; do
+    for lon in $hville_lons; do
+        check_file $lat $lon || urls+=("$(get_url $lat $lon)")
+    done
+done
+
+# if we have missing files, check the internet connection
+if [[ -n $urls ]]; then
+    if ! ping -w 3 -c 1 prd-tnm.s3.amazonaws.com ; then
+        echo "No internet access. Please check your network connection."
+        exit 1
+    fi
+else
+    echo "All files are present. No download needed."
+    exit 0
+fi
+
+failed=0
+
+# download the data
+for url in "${urls[@]}"; do
+echo "Downloading $url"
+    aria2c -x16 -d $dir "$url" || ((failed++))
+done
+
+# if any download failed, return error
+if [[ $failed -ne 0 ]]; then
+    echo "One or more downloads failed."
+    exit 1
+fi

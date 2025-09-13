@@ -1,0 +1,59 @@
+@import '../../colors.css';
+
+.overlay{
+	width:auto;
+	height: auto;
+}
+
+.upright {
+	position: relative;
+	writing-mode: vertical-rl;
+	text-orientation: upright;
+	letter-spacing: normal;
+}
+
+.sideways{
+	position: relative;
+	display: inline-flex;
+	font-size: 16px;
+	letter-spacing: 0.4em;
+}
+
+.l-Div {
+	position: absolute;
+	display: inline-flex;
+}
+
+.l-Line {
+	position:relative;
+	top:1em;
+	height: 3px;
+	width: 250%;
+	background-color: var(--maroon);
+}
+
+.r-Div {
+	position: absolute;
+}
+
+.r-Line {
+	position:absolute;
+	display: inline-flex;
+	bottom:0.5em;
+	height: 3px;
+	width: 250%;
+	background-color: var(--maroon);
+}
+
+.sectionHighlight {
+	position: absolute;
+	display: inline-flex;
+	width: 26%;
+	height: 26%;
+	bottom: 47.5%;
+	left: 8.5%;
+	border-radius: 50%;
+	outline-width: 5px;
+	outline-style:solid;
+	outline-color: var(--maroon);
+}
