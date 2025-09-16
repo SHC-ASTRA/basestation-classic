@@ -1,6 +1,6 @@
 from typing import *
 from std_srvs.srv import Empty
-from rclpy.node import Node, SrvTypeRequest, SrvTypeResponse
+from rclpy.node import Node, SrvTypeResponse
 from rclpy.service import Service
 from time import time
 from util.aiohttp_utils import WSSender
@@ -18,7 +18,7 @@ class Submodule(ABC):
     """
 
     name: str
-    node: Node | None
+    node: Node
 
     ws_sender: WSSender
 
@@ -29,7 +29,7 @@ class Submodule(ABC):
 
     def __init__(
         self,
-        node: Node | None,
+        node: Node,
         ws_sender: WSSender,
     ):
         self.LOG = logging.getLogger(__name__)
@@ -42,9 +42,7 @@ class Submodule(ABC):
                 Empty, f"/{self.name}/ping", self.handle_ping
             )
 
-    def handle_ping(
-        self, _: SrvTypeRequest, response: SrvTypeResponse
-    ) -> SrvTypeResponse:
+    def handle_ping(self, _: object, response: SrvTypeResponse) -> SrvTypeResponse:
         """
         Handle a ping request.
 
