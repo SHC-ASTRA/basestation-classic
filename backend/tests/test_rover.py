@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from util import websocket_types
 from .util import *
-from ros2_interfaces_pkg import msg
+from astra_msgs import msg
 from enum import Enum
 import argparse
 from asyncio import run
