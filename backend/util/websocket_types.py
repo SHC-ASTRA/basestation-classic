@@ -2,7 +2,7 @@ from typing import *
 
 import logging
 from abc import ABC
-from ros2_interfaces_pkg import msg
+from astra_msgs import msg
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import String
 import json

@@ -10,7 +10,7 @@ from typing import *
 from .util import generate_random_data
 import logging
 from util import websocket_types
-from ros2_interfaces_pkg.msg import ArmManual
+from astra_msgs.msg import ArmManual
 
 LOG = logging.getLogger(__name__)
 
