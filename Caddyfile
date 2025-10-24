@@ -1,5 +1,5 @@
 # main port. everything ends up here and this is what you connect to
-http://localhost:8080, http://192.168.1.31:8080, http://192.168.1.32:8080 {
+http://10.66.122.22:8080, http://10.42.0.1:8080, http://localhost:8080, http://192.168.1.31:8080, http://192.168.1.32:8080 {
 	# tile server
 	route /map* {
 		reverse_proxy localhost:5555 {

@@ -23,7 +23,7 @@ list_types = "tests:list_types"
 [dependency-groups]
 dev = [
     "pylance>=0.22.0,<0.23",
-    "black>=24.10.0,<25",
+    "black>=25.1.0,<26",
 ]
 
 [tool.hatch.build.targets.sdist]
