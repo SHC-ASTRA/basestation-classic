@@ -1,7 +1,7 @@
 from submodules import Submodule
 
-from ros2_interfaces_pkg import msg
-from ros2_interfaces_pkg import action
+from astra_msgs import msg
+from astra_msgs import action
 from util.aiohttp_utils import WSSender
 from rclpy.node import Node
 from rclpy.action import ActionClient

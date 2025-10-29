@@ -1,7 +1,7 @@
 from submodules import Submodule
 from util.aiohttp_utils import WSSender
 
-from ros2_interfaces_pkg import msg
+from astra_msgs import msg
 from rclpy.node import Node
 import logging
 
