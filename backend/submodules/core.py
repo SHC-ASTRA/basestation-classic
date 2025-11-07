@@ -1,7 +1,7 @@
 from submodules import Submodule
 
 # ControllerState & CoreFeedback
-from ros2_interfaces_pkg import msg
+from astra_msgs import msg
 from util.aiohttp_utils import WSSender
 from rclpy.node import Node
 import logging

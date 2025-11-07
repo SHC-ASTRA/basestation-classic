@@ -8,6 +8,9 @@ COPY --from=bun /usr/local/bin/bunx /usr/local/bin/bunx
 # change shell to bash
 SHELL ["/bin/bash", "-c"]
 
+# make sure ros is able to communicate with the host system too
+ENV FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+
 
 ###########################
 # INSTALL SYSTEM PACKAGES #

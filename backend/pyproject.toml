@@ -22,15 +22,15 @@ list_types = "tests:list_types"
 
 [dependency-groups]
 dev = [
-    "pylance>=0.22.0,<0.23",
-    "black>=25.1.0,<26",
+    "pylance>=0.22.0",
+    "black>=24.10.0",
 ]
 
 [tool.hatch.build.targets.sdist]
-include = ["./interfaces/install/ros2_interfaces_pkg/lib/python3.10/site-packages/ros2_interfaces_pkg"]
+include = ["./interfaces/install/astra_msgs/lib/python3.10/site-packages/astra_msgs"]
 
 [tool.hatch.build.targets.wheel]
-include = ["./interfaces/install/ros2_interfaces_pkg/lib/python3.10/site-packages/ros2_interfaces_pkg"]
+include = ["./interfaces/install/astra_msgs/lib/python3.10/site-packages/astra_msgs"]
 
 [build-system]
 requires = ["hatchling"]
