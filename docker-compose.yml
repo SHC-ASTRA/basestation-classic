@@ -11,6 +11,8 @@ services:
     working_dir: /release/backend
     command: bash -c "source /release/.devcontainer/.bashrc && colcon-b1 && poetry install && poetry run start"
     network_mode: host
+    cap_add:
+      - NET_ADMIN
   frontend:
     build:
       context: ./.devcontainer

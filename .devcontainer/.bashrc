@@ -83,3 +83,7 @@ eval "$(register-python-argcomplete pipx)"
 
 # add our cool and special tools to the path
 export PATH=$PATH:/release/.devcontainer/bin
+
+# Force Fast DDS (fastrtps) to use UDPv4 instead of SHM
+# Fixes basestation + anchor on same machine
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
