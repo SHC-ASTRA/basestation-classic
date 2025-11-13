@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/release
-    user: astra
+    user: ubuntu
     command: bash -c "while true; do sleep 5000; done"
     network_mode: host
 

@@ -1,7 +1,7 @@
 FROM oven/bun:debian AS bun
-# using image with ros humble already installed
+# using image with ros jazzy already installed
 # https://hub.docker.com/_/ros/
-FROM ros:humble-ros-core-jammy
+FROM ros:jazzy-ros-core-noble
 COPY --from=bun /usr/local/bin/bun /usr/local/bin/bun
 COPY --from=bun /usr/local/bin/bunx /usr/local/bin/bunx
 
@@ -59,7 +59,7 @@ RUN apt-get update \
         # add colcon
         python3-colcon-common-extensions \
         # add ros-dev-tools for development toolchain
-        ros-dev-tools ros-humble-demo-nodes-cpp \
+        ros-dev-tools ros-jazzy-demo-nodes-cpp \
         # install python build requirements for pyenv
         # see: <https://github.com/pyenv/pyenv/wiki#suggested-build-environment>
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
@@ -74,18 +74,11 @@ RUN apt-get update \
 # install starship (better bash prompt)
 RUN curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 
-# set up astra user
-RUN useradd -m -U astra \
-    && usermod -a -G sudo astra \
-    && chsh -s /usr/bin/bash astra \
-    && passwd -d astra
-
-
 ###########################
 # SWITCH TO NON-ROOT USER #
 ###########################
 
-USER astra
+USER ubuntu
 
 # we want scripts to be able to modify our bashrc, but we also
 #   want pretty strong control over its contents. to achieve this,
@@ -95,8 +88,8 @@ RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
 RUN ln -s /release/.devcontainer/.bashrc ~/.dev_bashrc
 
 # python stuff first for better caching (it takes eons)
-# install pyenv so we can use python 3.10 required by ros2 humble
-ENV PYENV_ROOT="/home/astra/.pyenv"
+# install pyenv so we can use python 3.10 required by ros2 jazzy
+ENV PYENV_ROOT="/home/ubuntu/.pyenv"
 RUN curl https://pyenv.run | bash
 
 # install python 3.10.

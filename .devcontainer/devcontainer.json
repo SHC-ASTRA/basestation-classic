@@ -5,7 +5,7 @@
     ],
     "service": "basestation",
     "workspaceFolder": "/release",
-    "remoteUser": "astra",
+    "remoteUser": "ubuntu",
     "customizations": {
         "vscode": {
             "extensions": [

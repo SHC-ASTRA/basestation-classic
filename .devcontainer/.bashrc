@@ -63,7 +63,7 @@ export STARSHIP_CONFIG="/release/.devcontainer/starship.toml"
 eval "$(starship init bash)"
 
 # set up ros paths and commands
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 
 # set up ros interface
 # make the user build the interfaces package if it has not already been
