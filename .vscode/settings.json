@@ -42,5 +42,5 @@
         "venv"
     ],
     "files.autoSave": "onFocusChange",
-    "ros.distro": "humble"
+    "ros.distro": "jazzy"
 }

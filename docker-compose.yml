@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - .:/release
-    user: astra
+    user: ubuntu
     working_dir: /release/backend
     command: bash -c "source /release/.devcontainer/.bashrc && colcon-b1 && poetry install && poetry run start"
     network_mode: host
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     volumes:
       - .:/release
-    user: astra
+    user: ubuntu
     working_dir: /release/frontend
     command: bash -c "source /release/.devcontainer/.bashrc && bun i && bun run dev"
     network_mode: host
@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/release
-    user: astra
+    user: ubuntu
     working_dir: /release
     command: bash -c "source /release/.devcontainer/.bashrc && download-maps"
   qgis-server:

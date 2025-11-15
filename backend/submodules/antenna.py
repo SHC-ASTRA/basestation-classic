@@ -27,12 +27,10 @@ class Antenna(Submodule):
 
     LOG = logging.getLogger(__name__)
     name = "antenna"
-    data_provider: Callable[[None], str | None] = None
+    data_provider: Callable[[], str | None] | None = None
     overwrite_msg: str | None = None
 
-    def __init__(
-        self, ws_sender: WSSender, data_provider: Callable[[None], str | None]
-    ):
+    def __init__(self, ws_sender: WSSender, data_provider: Callable[[], str | None]):
         super().__init__(None, ws_sender)
         self.data_provider = data_provider
         self.udp_transport = None  # Will hold persistent transport for receiving
@@ -47,6 +45,9 @@ class Antenna(Submodule):
         self.LOG.info("Starting UDP message sender task")
         while True:
             try:
+                if self.data_provider is None:
+                    await sleep(1)
+                    continue
                 to_send = self.data_provider()
                 if self.overwrite_msg is not None:
                     if self.overwrite_msg.startswith("!"):

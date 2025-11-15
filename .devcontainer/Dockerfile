@@ -66,13 +66,25 @@ RUN apt-get update \
         libsqlite3-dev libncursesw5-dev xz-utils tk-dev libxml2-dev \
         libxmlsec1-dev libffi-dev liblzma-dev \
         debian-keyring debian-archive-keyring apt-transport-https \
-    #
+	    pipx python3-pip \
+        python3-rosdep \
+	#
     # clean up apt cache
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN rosdep init
+
 # install starship (better bash prompt)
 RUN curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
+
+# set up ubuntu user if it doesn't exist
+RUN useradd -m -U ubuntu \
+    || true
+# give ubuntu sudo permissions and set bash as default shell and remove password
+RUN usermod -a -G sudo ubuntu \
+    && chsh -s /usr/bin/bash ubuntu\
+    && passwd -d ubuntu
 
 ###########################
 # SWITCH TO NON-ROOT USER #
@@ -87,29 +99,15 @@ USER ubuntu
 RUN echo 'source ~/.dev_bashrc' > ~/.bashrc
 RUN ln -s /release/.devcontainer/.bashrc ~/.dev_bashrc
 
-# python stuff first for better caching (it takes eons)
-# install pyenv so we can use python 3.10 required by ros2 jazzy
-ENV PYENV_ROOT="/home/ubuntu/.pyenv"
-RUN curl https://pyenv.run | bash
-
-# install python 3.10.
-#   empy is broken in 3.11 with colcon, so we need to use 3.10
-ENV PY_VERSION=3.10
-RUN $PYENV_ROOT/bin/pyenv install $PY_VERSION -v \
-    && $PYENV_ROOT/bin/pyenv global $PY_VERSION
+RUN rosdep update
 
 # install poetry via pipx.
 #   poetry is our package manager for backend. it's used to manage python dependencies
 #   without being a pile of garbage like pip
-RUN $PYENV_ROOT/bin/pyenv exec pip install -U pipx \
-    && $PYENV_ROOT/bin/pyenv exec python -m pipx install poetry
+RUN pipx ensurepath && pipx install poetry
 
-# install required python packages for colcon builds.
-#   normally these would be installed by poetry, but we don't want to make many assumptions
-#   about the layout of either submodule, so we install them here
-RUN $PYENV_ROOT/bin/pyenv exec pip install -U \
-    'empy>=3.3.4,<3.4.0' \
-    'catkin-pkg>=1.0.0,<1.1.0' \
-    'lark>=1.2.2,<1.3.0' \
-    'numpy>=2.2.4,<2.3.0'
-
+RUN mkdir -p /home/ubuntu/ws/src
+RUN git clone https://github.com/SHC-ASTRA/astra_msgs.git /home/ubuntu/ws/src/astra_msgs \
+    && cd /home/ubuntu/ws/src/astra_msgs \
+    && git checkout 6a5707272398e364005ca2bfa17bea648f704b49
+RUN rosdep install --from-paths /home/ubuntu/ws/src -y --ignore-src

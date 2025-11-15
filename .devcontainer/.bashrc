@@ -74,10 +74,6 @@ else
   echo '[DEV CONTAINER] Please build the interfaces!'
 fi
 
-# set up pyenv
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 export PATH="$PATH:/home/astra/.local/bin"
 eval "$(register-python-argcomplete pipx)"
 

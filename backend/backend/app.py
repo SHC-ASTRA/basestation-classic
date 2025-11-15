@@ -111,7 +111,7 @@ async def start_webserver():
     app.add_routes(routes)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, host="0.0.0.0", port="5000")
+    site = web.TCPSite(runner, host="0.0.0.0", port=5000)
     await site.start()
 
 
@@ -125,7 +125,7 @@ def main():
         submodules.append(submodule)
         executor.add_node(submodule.node)
 
-    data_provider: Callable[[None], str | None] = None
+    data_provider: Callable[[], str | None] | None = None
     for submodule in submodules:
         if isinstance(submodule, Core):
             data_provider = lambda: submodule.last_sat
@@ -138,20 +138,22 @@ def main():
 
     LOG.info("Initializing webserver routes")
 
-    loop = asyncio.get_event_loop()
-    future = asyncio.wait(
-        [
-            spin_loop(executor),
-            start_webserver(),
-            ws_connections.loop(),
-            antenna.send_udp_message_task(),
-            antenna.listen_for_udp_messages(),
-        ],
-        return_when=asyncio.FIRST_EXCEPTION,
-    )
-    try:
-        done, _ = loop.run_until_complete(future)
+    async def run_all():
+        """Run all async tasks concurrently."""
+        tasks = [
+            asyncio.create_task(spin_loop(executor)),
+            asyncio.create_task(start_webserver()),
+            asyncio.create_task(ws_connections.loop()),
+            asyncio.create_task(antenna.send_udp_message_task()),
+            asyncio.create_task(antenna.listen_for_udp_messages()),
+        ]
+        done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_EXCEPTION)
         for task in done:
             task.result()
+        for task in pending:
+            task.cancel()
+
+    try:
+        asyncio.run(run_all())
     except KeyboardInterrupt:
         LOG.info("Shutting down")
